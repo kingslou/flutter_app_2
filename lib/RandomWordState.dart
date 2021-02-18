@@ -9,15 +9,21 @@ class RandomWordState extends State<RandomWords> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('xxxx'),
+        actions: <Widget>[
+          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved)
+        ],
       ),
       body: _buildList(),
     );
   }
 
+  //
   final _suggestions = <WordPair>[];
   final _bigFont = const TextStyle(fontSize: 18.0);
+
   //收藏列表
   final _saved = new Set<WordPair>();
+
   // 对于Flutter 全是widget
   Widget _buildRow(WordPair wordPair) {
     final _alreadySaved = _saved.contains(wordPair);
@@ -56,5 +62,34 @@ class RandomWordState extends State<RandomWords> {
           }
           return _buildRow(_suggestions[index]);
         });
+  }
+
+  void _pushSaved() {
+    Navigator.of(context).push(
+      new MaterialPageRoute(
+        builder: (context) {
+          final tiles = _saved.map(
+            (pair) {
+              return new ListTile(
+                title: new Text(
+                  pair.asPascalCase,
+                  style: _bigFont,
+                ),
+              );
+            },
+          );
+          final divided = ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+          ).toList();
+
+          return new Scaffold(appBar: new AppBar(
+            title: new Text("data"),
+          ),
+          body: new ListView(children: divided,),
+          );
+        },
+      ),
+    );
   }
 }
