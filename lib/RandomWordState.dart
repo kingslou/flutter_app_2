@@ -8,9 +8,10 @@ class RandomWordState extends State<RandomWords> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('xxxx'),
+        title: new Text('学习列表',style: TextStyle(color: Colors.white),),
+        centerTitle: true,
         actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved)
+          new IconButton(icon: new Icon(Icons.list),color: Colors.white, onPressed: _pushSaved)
         ],
       ),
       body: _buildList(),
@@ -83,10 +84,15 @@ class RandomWordState extends State<RandomWords> {
             tiles: tiles,
           ).toList();
 
-          return new Scaffold(appBar: new AppBar(
-            title: new Text("data"),
-          ),
-          body: new ListView(children: divided,),
+          return new Scaffold(
+            appBar: new AppBar(
+              title: new Text("我的收藏",style: TextStyle(color: Colors.white),),
+              leading: IconButton(icon:Icon(Icons.arrow_back,color: Colors.white),
+                  onPressed: ()=>Navigator.of(context).pop()),
+            ),
+            body: new ListView(
+              children: divided,
+            ),
           );
         },
       ),

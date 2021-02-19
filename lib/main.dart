@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_2/RandomWordState.dart';
-import 'package:english_words/english_words.dart';
 void main() {
   runApp(MyApp());
 }
